@@ -20,8 +20,6 @@ IB_DESIGNABLE
 
 @property(nonatomic,assign)NSTimeInterval loopInterval;//Default is 3
 
-@property(nonatomic,assign,readonly)BOOL isLoop;//you must check this property,or you cannot destory LoopView
-
 @property(nonatomic,assign)IBInspectable BOOL isWebImage;//Default to NO,if you use storyboard,you must set this value before set images
 
 @property(nonatomic,strong)NSArray *images;
@@ -33,9 +31,5 @@ IB_DESIGNABLE
 - (instancetype)initWithFrame:(CGRect)frame webImages:(NSArray *)webImages handler:(SelectIndexHandler)handler;
 
 - (instancetype)initWithFrame:(CGRect)frame images:(NSArray *)images handler:(SelectIndexHandler)handler;
-
-- (void)stopLoop;
-
-- (void)resumeLoop;
 
 @end

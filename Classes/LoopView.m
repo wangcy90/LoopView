@@ -15,11 +15,46 @@
 #import <Masonry/Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
+// tanks to FLWeakProxy
+// See https://github.com/Flipboard/FLAnimatedImage/blob/master/FLAnimatedImage/FLAnimatedImage.m
+@interface LoopWeakProxy : NSProxy
+
+@property(nonatomic, weak)id target;
+
+@end
+
+
+@implementation LoopWeakProxy
+
++ (instancetype)weakProxyForObject:(id)targetObject {
+    LoopWeakProxy *weakProxy = [LoopWeakProxy alloc];
+    weakProxy.target = targetObject;
+    return weakProxy;
+}
+
+#pragma mark Forwarding Messages
+
+- (id)forwardingTargetForSelector:(SEL)selector {
+    return _target;
+}
+
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    void *nullPointer = NULL;
+    [invocation setReturnValue:&nullPointer];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    return [NSObject instanceMethodSignatureForSelector:@selector(init)];
+}
+
+@end
+
 @interface LoopView()<UIScrollViewDelegate> {
     UIScrollView *_scrollView;
     UIPageControl *_pageControl;
-    NSInteger centerImgIdx;
+    NSInteger _centerImgIdx;
     NSTimer *_timer;
+    LoopWeakProxy *_weakProxy;
 }
 
 @property(nonatomic,strong)NSMutableArray *imageViews;
@@ -29,6 +64,13 @@
 @end
 
 @implementation LoopView
+
+- (void)dealloc {
+    if (_weakProxy) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:_weakProxy];
+    }
+    [self stopTimer];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame webImages:(NSArray *)webImages handler:(SelectIndexHandler)handler {
     return [self initWithFrame:frame images:webImages isWebImage:YES handler:handler];
@@ -50,6 +92,8 @@
 
 - (void)commonInit {
     
+    _weakProxy = [LoopWeakProxy weakProxyForObject:self];
+    
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -58,16 +102,14 @@
     [self addSubview:_scrollView];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
-        make.width.equalTo(self.width);
+        make.edges.with.height.equalTo(self);
     }];
     
     UIView *contentView = [[UIView alloc]init];
     [_scrollView addSubview:contentView];
     
     [contentView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(_scrollView);
-        make.height.equalTo(_scrollView.height);
+        make.edges.height.equalTo(_scrollView);
     }];
     
     _pageControl = [[UIPageControl alloc]init];
@@ -94,7 +136,7 @@
         [self setImage:_images.firstObject toImageView:imageView];
         
         [imageView makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.bottom.equalTo(contentView);
+            make.left.top.bottom.equalTo(self);
             make.width.equalTo(self.width);
         }];
         
@@ -126,7 +168,7 @@
             
             [imageView makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(lastView ? lastView.right : contentView.left);
-                make.top.bottom.equalTo(contentView);
+                make.top.bottom.equalTo(self);
                 make.width.equalTo(self.width);
             }];
             
@@ -137,20 +179,24 @@
             make.right.equalTo(lastView.right);
         }];
         
-        centerImgIdx = 1;
+        _centerImgIdx = 1;
         
         _scrollView.contentSize = CGSizeMake(self.frame.size.width * 3, self.frame.size.height);
         
         self.loopInterval = 3;
 
     }
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
 }
 
 #pragma mark - timer
 
 - (void)startTimer {
     if (_images.count == 1) return;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:self.loopInterval target:self selector:@selector(fire) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:self.loopInterval target:_weakProxy selector:@selector(fire) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
 }
 
@@ -174,15 +220,7 @@
     }
     
     [_scrollView setContentOffset:CGPointMake(offsetX + width, 0) animated:YES];
-}
-
-- (void)stopLoop {
-    [self stopTimer];
-}
-
-- (void)resumeLoop {
-    [self stopLoop];
-    [self startTimer];
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -209,19 +247,19 @@
     
     if (point.x >= self.frame.size.width * 2) {
         
-        centerImgIdx++;
+        _centerImgIdx++;
         
-        if (centerImgIdx == _images.count) {
-            centerImgIdx = 0;
+        if (_centerImgIdx == _images.count) {
+            _centerImgIdx = 0;
         }
         
-        NSInteger leftIdx = centerImgIdx - 1;
+        NSInteger leftIdx = _centerImgIdx - 1;
         
-        if (centerImgIdx == 0) {
+        if (_centerImgIdx == 0) {
             leftIdx = _images.count - 1;
         }
         
-        NSInteger rightIdx = centerImgIdx + 1;
+        NSInteger rightIdx = _centerImgIdx + 1;
         
         if (rightIdx == _images.count) {
             rightIdx = 0;
@@ -229,7 +267,7 @@
 
         [self setImage:_images[leftIdx] toImageView:firstImageView];
         
-        [self setImage:_images[centerImgIdx] toImageView:secondImageView];
+        [self setImage:_images[_centerImgIdx] toImageView:secondImageView];
         
         [self setImage:_images[rightIdx] toImageView:thirdImageView];
         
@@ -237,19 +275,19 @@
         
     }else if (point.x <= 0) {
         
-        centerImgIdx--;
+        _centerImgIdx--;
         
-        if (centerImgIdx < 0) {
-            centerImgIdx = _images.count -1;
+        if (_centerImgIdx < 0) {
+            _centerImgIdx = _images.count -1;
         }
         
-        NSInteger leftIdx = centerImgIdx -1;
+        NSInteger leftIdx = _centerImgIdx -1;
         
-        if (centerImgIdx == 0) {
+        if (_centerImgIdx == 0) {
             leftIdx = _images.count - 1;
         }
         
-        NSInteger rightIdx = centerImgIdx + 1;
+        NSInteger rightIdx = _centerImgIdx + 1;
         
         if (rightIdx == _images.count) {
             rightIdx = 0;
@@ -257,7 +295,7 @@
         
         [self setImage:_images[leftIdx] toImageView:firstImageView];
         
-        [self setImage:_images[centerImgIdx] toImageView:secondImageView];
+        [self setImage:_images[_centerImgIdx] toImageView:secondImageView];
         
         [self setImage:_images[rightIdx] toImageView:thirdImageView];
         
@@ -265,12 +303,13 @@
         
     }
     
-    _pageControl.currentPage = centerImgIdx;
+    _pageControl.currentPage = _centerImgIdx;
     
 }
 
 - (void)setImage:(NSString *)image toImageView:(UIImageView *)imageView {
     if (self.isWebImage) {
+        imageView.image = nil;
         UIImage *placeholderImage;
         if (self.placeHolderName.length) {
             placeholderImage = [UIImage imageNamed:self.placeHolderName];
@@ -301,17 +340,12 @@
     _images = images;
     [self stopTimer];
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    _scrollView = nil;
+    _weakProxy = nil;
     [self commonInit];
 }
 
 #pragma mark - getters
-
-- (BOOL)isLoop {
-    if (_timer) {
-        return _timer.valid;
-    }
-    return NO;
-}
 
 - (NSString *)placeHolderName {
     if (!_placeHolderName) {

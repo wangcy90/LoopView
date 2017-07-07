@@ -4,7 +4,7 @@
 # use_frameworks!
 
 target 'LoopView' do
-	pod 'Masonry', '~> 1.0.1'
-	pod 'SDWebImage', '~> 3.7.6'
+	pod 'Masonry', '~> 1.0.2'
+	pod 'SDWebImage', '~> 4.0.0'
 end
 

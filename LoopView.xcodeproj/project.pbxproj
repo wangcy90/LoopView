@@ -14,7 +14,7 @@
 		2651A78B1D06984300D5758E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2651A78A1D06984300D5758E /* Assets.xcassets */; };
 		2651A78E1D06984300D5758E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2651A78C1D06984300D5758E /* LaunchScreen.storyboard */; };
 		2651A7981D0698B700D5758E /* LoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2651A7971D0698B700D5758E /* LoopView.m */; };
-		B0D1BA8D5540595C4B53EA54 /* libPods-LoopView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7902EFB911417F0748BD39 /* libPods-LoopView.a */; };
+		C7D1AC3DC1B7F189687E4261 /* libPods-LoopView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2668F9A550F8C2BF1FA521F7 /* libPods-LoopView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +31,9 @@
 		2651A7961D0698B700D5758E /* LoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopView.h; sourceTree = "<group>"; };
 		2651A7971D0698B700D5758E /* LoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopView.m; sourceTree = "<group>"; };
 		2651A7991D06998300D5758E /* LoopView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoopView-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		670578C4F96946C427354BF7 /* Pods-LoopView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoopView/Pods-LoopView.debug.xcconfig"; sourceTree = "<group>"; };
-		AA7902EFB911417F0748BD39 /* libPods-LoopView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LoopView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD3BFFFA90993A866DF7B35C /* Pods-LoopView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopView.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoopView/Pods-LoopView.release.xcconfig"; sourceTree = "<group>"; };
+		2668F9A550F8C2BF1FA521F7 /* libPods-LoopView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LoopView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F5CE3946C5EA67F04BB9FC /* Pods-LoopView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopView.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoopView/Pods-LoopView.release.xcconfig"; sourceTree = "<group>"; };
+		A4B95ACC0CBD6020E060D20B /* Pods-LoopView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoopView/Pods-LoopView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0D1BA8D5540595C4B53EA54 /* libPods-LoopView.a in Frameworks */,
+				C7D1AC3DC1B7F189687E4261 /* libPods-LoopView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,8 +54,8 @@
 				2651A7951D0698B700D5758E /* Classes */,
 				2651A77D1D06984300D5758E /* LoopView */,
 				2651A77C1D06984300D5758E /* Products */,
-				EECC18F6841C992394EC8BC5 /* Pods */,
-				2CDCBE8FB8638C3D8456E9EC /* Frameworks */,
+				4410F077635B017A33EC618C /* Pods */,
+				E1BED88A704B512FB9A85D1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,21 +101,21 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		2CDCBE8FB8638C3D8456E9EC /* Frameworks */ = {
+		4410F077635B017A33EC618C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AA7902EFB911417F0748BD39 /* libPods-LoopView.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EECC18F6841C992394EC8BC5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				670578C4F96946C427354BF7 /* Pods-LoopView.debug.xcconfig */,
-				DD3BFFFA90993A866DF7B35C /* Pods-LoopView.release.xcconfig */,
+				A4B95ACC0CBD6020E060D20B /* Pods-LoopView.debug.xcconfig */,
+				90F5CE3946C5EA67F04BB9FC /* Pods-LoopView.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E1BED88A704B512FB9A85D1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2668F9A550F8C2BF1FA521F7 /* libPods-LoopView.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,12 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2651A7921D06984300D5758E /* Build configuration list for PBXNativeTarget "LoopView" */;
 			buildPhases = (
-				061B22EC64C2B530B9AF22E3 /* Check Pods Manifest.lock */,
+				17797FB4525C1328FF5A6748 /* [CP] Check Pods Manifest.lock */,
 				2651A7771D06984300D5758E /* Sources */,
 				2651A7781D06984300D5758E /* Frameworks */,
 				2651A7791D06984300D5758E /* Resources */,
-				BD7185E6A2E6DA9A3708656E /* Embed Pods Frameworks */,
-				737669A0721E51BCB43C23A8 /* Copy Pods Resources */,
+				DBD75D5A1ABCEBE3F1995B7B /* [CP] Embed Pods Frameworks */,
+				3E1B0F3C139CF730B77531B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -147,7 +147,7 @@
 		2651A7731D06984300D5758E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = WangChongyang;
 				TargetAttributes = {
 					2651A77A1D06984300D5758E = {
@@ -187,29 +187,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		061B22EC64C2B530B9AF22E3 /* Check Pods Manifest.lock */ = {
+		17797FB4525C1328FF5A6748 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		737669A0721E51BCB43C23A8 /* Copy Pods Resources */ = {
+		3E1B0F3C139CF730B77531B5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,14 +217,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LoopView/Pods-LoopView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BD7185E6A2E6DA9A3708656E /* Embed Pods Frameworks */ = {
+		DBD75D5A1ABCEBE3F1995B7B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,8 +282,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -305,7 +307,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -326,8 +328,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -343,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -352,7 +356,7 @@
 		};
 		2651A7931D06984300D5758E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 670578C4F96946C427354BF7 /* Pods-LoopView.debug.xcconfig */;
+			baseConfigurationReference = A4B95ACC0CBD6020E060D20B /* Pods-LoopView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LoopView-Prefix.pch";
@@ -365,7 +369,7 @@
 		};
 		2651A7941D06984300D5758E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD3BFFFA90993A866DF7B35C /* Pods-LoopView.release.xcconfig */;
+			baseConfigurationReference = 90F5CE3946C5EA67F04BB9FC /* Pods-LoopView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LoopView-Prefix.pch";

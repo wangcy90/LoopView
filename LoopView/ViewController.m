@@ -57,11 +57,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [_loopView stopLoop];
-    [self.loopView1 stopLoop];
-}
-
 #pragma mark - getters
 
 - (LoopView *)loopView1 {
